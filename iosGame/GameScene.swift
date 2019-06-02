@@ -14,7 +14,7 @@ class GameScene: SKScene {
     var player = SKSpriteNode(imageNamed: "Player")
     var lock = SKSpriteNode(imageNamed: "Lock")
     var dot = SKSpriteNode(imageNamed: "Dot")
-    
+    var myLabel = SKLabelNode()
     var path = UIBezierPath()
     
     var gameStarted = Bool()
@@ -28,7 +28,7 @@ class GameScene: SKScene {
     var currentScore = Int()
     var highLevel = Int()
     
-    var View1 = UIView()
+//    var View1 = UIView()
     
     override func didMove(to view: SKView) {
         loadView()
@@ -46,7 +46,7 @@ class GameScene: SKScene {
             
             UserDefaults.standard.set(1, forKey: "HighLevel")
         }
-        View1 = UIView(frame: CGRect(origin: CGPoint(x: self.frame.width / 2 + 120, y: self.frame.height / 2), size: CGSize(width: self.frame.width, height: self.frame.height)))
+//        View1 = UIView(frame: CGRect(origin: CGPoint(x: 120, y: self.frame.height / 0), size: CGSize(width: self.frame.width, height: self.frame.height)))
 
         
     }
@@ -67,13 +67,20 @@ class GameScene: SKScene {
         self.addChild(player)
         addDot()
         
-        LevelLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 100))
-        LevelLabel.center = (self.view?.center)!
-        LevelLabel.text = "\(currentScore)"
-        LevelLabel.textColor = SKColor.darkGray
-        LevelLabel.textAlignment = NSTextAlignment.center
-        LevelLabel.font = UIFont.systemFont(ofSize: 60)
-        self.View1.addSubview(LevelLabel)
+//        LevelLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 100))
+//        LevelLabel.center = (self.view?.center)!
+//        LevelLabel.text = "\(currentScore)"
+//        LevelLabel.textColor = SKColor.darkGray
+//        LevelLabel.textAlignment = NSTextAlignment.center
+//        LevelLabel.font = UIFont.systemFont(ofSize: 60)
+//        self.View1.addSubview(LevelLabel)
+        
+        
+        myLabel.text = "\(currentScore)"
+        myLabel.color = SKColor.darkGray
+        myLabel.fontSize = 60
+        myLabel.position = CGPoint(x: 0, y: 0)
+        self.addChild(myLabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -207,16 +214,13 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         if player.intersects(dot){
             intersected = true
-            
         }
         else{
             if intersected == true{
                 if player.intersects(dot) == false{
                     died()
                 }
-                
             }
-            
         }
         
     }
